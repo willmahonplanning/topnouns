@@ -1,0 +1,22 @@
+import nltk
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        text = request.form["text"]
+        # Tokenize the text
+        tokens = nltk.word_tokenize(text)
+        # POS-tag the tokens
+        tagged_tokens = nltk.pos_tag(tokens)
+        # Identify the nouns
+        nouns = [word for word, pos in tagged_tokens if pos[:2] == "NN"]
+        # Add "top" to the beginning of each noun
+        modified_nouns = ["top " + noun for noun in nouns]
+        return render_template("index.html", modified_nouns=modified_nouns)
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run()
