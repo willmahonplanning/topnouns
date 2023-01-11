@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Noun Modifier</title>
+    </head>
+    <body>
+        <h1>Noun Modifier</h1>
+        <form method="post">
+            <label for="text">Enter a text:</label>
+            <textarea id="text" name="text"></textarea>
+            <input type="submit" value="Modify">
+        </form>
+        {% if modified_nouns %}
+            <p>Modified nouns:</p>
+            <ul>
+                {% for noun in modified_nouns %}
+                    <li>{{ noun }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </body>
+</html>
